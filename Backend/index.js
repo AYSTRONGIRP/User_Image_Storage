@@ -25,7 +25,7 @@ app.use('/newUpload',newUpload)
 app.use('/showPhotoes',showPhotoes)
 app.use('/user',UserLoginRegister)
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8001;
 app.listen(port,()=>{
     console.log(`image portal server running on port ${port}`)
 });
