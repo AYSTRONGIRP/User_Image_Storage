@@ -1,10 +1,10 @@
 const express = require('express');
-
 const fileUpload = require('express-fileupload');
-
 const router = express.Router();
 const path = require('path');
+const cors = require('cors');
 const fs = require('fs');
+router.use(cors())
 router.use(fileUpload())
 
 const assetPath = path.join(__dirname, '../assets');

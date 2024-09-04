@@ -11,9 +11,10 @@ var bodyParser = require('body-parser');
 const User = require('./models/user_model')
 
 // middleware
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
-app.use(cors());
+
 
 //importing routes
 const newUpload = require('./routes/newUpload')
