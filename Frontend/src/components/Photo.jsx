@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useDispatch , useSelector } from 'react-redux'
 import { setEmail , setPassword , setId } from '../slices/login_info'
 import { useEffect ,useState } from 'react';
-
+import base from '../config';
 const Photo = ({ key }) => {
     const fileUpload = createRef();
     const id = useSelector((state)=>state.info.id)
@@ -14,7 +14,7 @@ const Photo = ({ key }) => {
     const dispatch = useDispatch();
     const [imageUrls, setImageUrls] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:8080/showPhotoes?id=${id}`)
+    axios.get(`${base}/showPhotoes?id=${id}`)
       .then(response => {
         console.log(response)
         setImageUrls(response.data.images);
@@ -48,7 +48,7 @@ const Photo = ({ key }) => {
       <h2>Image Gallery</h2>
       <div className='image_container'>
       {imageUrls.map((imageUrl, index) => (
-        <img key={index} src={`http://localhost:8080${imageUrl}`} alt={`Image ${index}`} />
+        <img key={index} src={`${base}${imageUrl}`} alt={`Image ${index}`} />
       ))}
       </div>
     </div>

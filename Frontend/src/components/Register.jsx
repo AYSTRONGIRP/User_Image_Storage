@@ -3,7 +3,7 @@ import axios from 'axios';
 import { setName,setEmail,setPassword} from '../slices/login_info'
 import { useSelector,useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-
+import base from '../config';
 
 const Register = () => {
   const name = useSelector((state)=>state.info.name)
@@ -11,11 +11,12 @@ const Register = () => {
   const password = useSelector((state)=>state.info.password)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log(base,"base register");
   const registerUser = async(e) => {
     e.preventDefault();
     const response = await axios({
       method: 'POST',
-      url: 'http://localhost:8080/register',
+      url: `${base}/user/register`,
       data:{
         name:name,
         email:email,

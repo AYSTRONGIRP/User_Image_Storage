@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useDispatch , useSelector } from 'react-redux'
 import { setEmail , setPassword , setId } from '../slices/login_info'
 import { useNavigate } from 'react-router-dom';
+import base from '../config'
 const Login = () => {
   const id = useSelector((state)=>state.info.id)
   const email = useSelector((state)=>state.info.email)
@@ -10,25 +11,17 @@ const Login = () => {
   const name = useSelector((state)=>state.info.name)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log("123" , email, password);
+  console.log("details check" , email, password);
+  console.log(base,"base");
   const loginUser = async(e) => {
     e.preventDefault();
-    const response = await axios.post('http://localhost:8080/login', {
+    const response = await axios.post(`${base}/user/login`, {
     email:email,
     password:password,
   });
   console.log(email, password);
-    // const response = await axios({
-    //   method: 'POST',
-    //   url: 'http://localhost:8080/login',
-    //   data:{
-    //     email:email,
-    //     password:password
-    //   },
-    // })
-    // console.log(response.data);
 
-    await dispatch(setId(response.data));
+    dispatch(setId(response.data));
     console.log("response.data")
     console.log(id)
     console.log(response.data);

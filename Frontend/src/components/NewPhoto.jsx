@@ -6,6 +6,9 @@ import { setEmail , setPassword , setId , clear} from '../slices/login_info'
 import { useState , useEffect} from 'react';
 import Photo from './Photo';
 import { useNavigate } from 'react-router-dom';
+import base from '../config';
+import { Navigate } from "react-router-dom";
+
 const NewPhoto = () => {
     const fileUpload = createRef();
     const id = useSelector((state)=>state.info.id)
@@ -16,29 +19,28 @@ const NewPhoto = () => {
     const navigate = useNavigate();
     const [refreshKey, setRefreshKey] = useState(0);
 
-    // useEffect(() =>{
-    //   if (!email) 
-    //   {
-    //   navigate('/login');
-    //   }},[email])
-
     const onSubmit = async(e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("photo", fileUpload.current.files[0]);
         formData.append("id", id);
         try {
-          const response = await axios.post('http://localhost:8080/newUpload', formData);
+          const response = await axios.post(`${base}/newUpload`, formData);
           console.log(response);
           setRefreshKey((prevKey) => prevKey + 1);
           console.log('Refresh Key:', refreshKey);
         } catch (error) {
           console.error('Error during the request:', error);
         }
-        
     }
 
-    
+    useEffect(() => {{
+      console.log(id);
+
+      if(!id){
+        dispatch(clear());navigate('/login');
+      }
+    }}, [id]);
 
   return (
     <div>
@@ -65,7 +67,7 @@ const NewPhoto = () => {
       <div className='upload'>
       
       <form onSubmit={onSubmit}>
-      <input type="file" name="photo" ref={fileUpload} />
+      <input type="file" name="photo" ref={fileUpload} accept="image/png, image/jpeg"/>
       <input type='submit' value="Submit" />
       </form>
       </div>

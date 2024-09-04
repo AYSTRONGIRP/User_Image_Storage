@@ -12,6 +12,8 @@ const assetPath = path.join(__dirname, '../assets');
 router.post('/', function(req, res){
     const photo = req.files.photo; // Use req.files to access files sent via FormData
     const id = req.body.id;
+    console.log(id);
+    console.log(photo);
     let modifiedAssetPath = path.join(assetPath, id);
     fs.mkdirSync(modifiedAssetPath, { recursive: true });
     const timestamp = new Date().getTime(); // Get the timestamp
