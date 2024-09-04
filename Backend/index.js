@@ -20,10 +20,10 @@ const newUpload = require('./routes/newUpload')
 const showPhotoes = require('./routes/showPhotoes')
 const UserLoginRegister = require('./routes/UserLoginRegister')
 //routers
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
-app.use('/newUpload',newUpload)
-app.use('/showPhotoes',showPhotoes)
-app.use('/user',UserLoginRegister)
+app.use('/image/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/image/newUpload',newUpload)
+app.use('/image/showPhotoes',showPhotoes)
+app.use('/image/user',UserLoginRegister)
 
 const port = process.env.PORT || 8001;
 app.listen(port,()=>{
